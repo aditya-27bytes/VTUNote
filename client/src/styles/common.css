@@ -1,0 +1,209 @@
+/* Common Styles */
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+
+.gap-1 { gap: 8px; }
+.gap-2 { gap: 16px; }
+.gap-3 { gap: 24px; }
+.gap-4 { gap: 32px; }
+
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.mb-4 { margin-bottom: 32px; }
+
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mt-4 { margin-top: 32px; }
+
+.py-1 { padding-top: 8px; padding-bottom: 8px; }
+.py-2 { padding-top: 16px; padding-bottom: 16px; }
+.py-3 { padding-top: 24px; padding-bottom: 24px; }
+.py-4 { padding-top: 32px; padding-bottom: 32px; }
+
+.px-1 { padding-left: 8px; padding-right: 8px; }
+.px-2 { padding-left: 16px; padding-right: 16px; }
+.px-3 { padding-left: 24px; padding-right: 24px; }
+.px-4 { padding-left: 32px; padding-right: 32px; }
+
+/* Card Styles */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  gap: 8px;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+}
+
+.button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+}
+
+.button-secondary {
+  background: #f3f4f6;
+  color: #4f46e5;
+}
+
+.button-secondary:hover {
+  background: #e5e7eb;
+}
+
+/* Navigation Specific Styles */
+.teacher-notes-link {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  border: 2px solid transparent !important;
+}
+
+.teacher-notes-link:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+  border-color: #34d399 !important;
+}
+
+/* Override for circular navbar - disable old navigation styles */
+nav.circular-navbar {
+  background: none !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important;
+  width: auto !important;
+  max-width: 90vw !important;
+}
+
+/* Old nav container - disabled for circular navbar */
+nav:not(.circular-navbar) .container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+}
+
+/* Circular navbar container overrides */
+nav.circular-navbar .circular-nav-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+}
+
+/* Old nav link styles - disabled for circular navbar */
+nav:not(.circular-navbar) a {
+  color: #374151 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+  font-size: 14px !important;
+}
+
+nav:not(.circular-navbar) a:hover {
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Circular navbar link styles are handled in main styles.css */
+nav.circular-navbar .nav-item,
+nav.circular-navbar .logo-link {
+  /* Styles are defined in styles.css - don't override here */
+  all: unset;
+}
+
+/* Old logo styles - disabled for circular navbar */
+nav:not(.circular-navbar) .logo {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #4f46e5 !important;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Responsive navigation - only for old navbar */
+@media (max-width: 768px) {
+  nav:not(.circular-navbar) .container {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  
+  nav:not(.circular-navbar) .d-flex {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  
+  nav:not(.circular-navbar) a {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+  }
+  
+  .teacher-notes-link {
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Circular navbar responsive styles are in styles.css */
+}

@@ -1,0 +1,211 @@
+.note-detail-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.note-detail-header {
+  margin-bottom: 24px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.back-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #4a5568;
+  background-color: #e2e8f0;
+}
+
+.note-meta {
+  display: flex;
+  gap: 16px;
+}
+
+.views, .likes {
+  color: #4a5568;
+}
+
+.note-title-section {
+  margin-bottom: 20px;
+}
+
+.note-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.note-badges span {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  background-color: #e2e8f0;
+}
+
+/* Action buttons layout */
+.note-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.like-btn,
+.study-btn,
+.tab-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.like-btn {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.study-btn {
+  background-color: #10b981;
+  color: white;
+}
+
+/* Tabs layout */
+.note-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  background-color: #f8fafc;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.tab-btn {
+  background-color: transparent;
+  color: #4b5563;
+}
+
+.tab-btn.active {
+  background-color: #4f46e5;
+  color: white;
+}
+
+/* Content sections */
+.note-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Make all action button styles consistent */
+.ask-btn,
+.generate-button,
+.submit-button,
+.nav-btn,
+.clear-highlights-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+  justify-content: center;
+  background-color: #4f46e5;
+  color: white;
+}
+
+.ask-btn:disabled,
+.generate-button:disabled,
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Q&A section */
+.qna-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.question-input-section {
+  background-color: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.question-input-container {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.question-input {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Highlight menu styles */
+.highlight-menu {
+  position: fixed;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.text-highlight,
+.search-highlight {
+  padding: 2px 0;
+  border-radius: 2px;
+}
+
+/* Responsive layout */
+@media (max-width: 640px) {
+  .note-actions,
+  .note-tabs,
+  .question-input-container {
+    flex-direction: column;
+  }
+
+  .like-btn,
+  .study-btn,
+  .ask-btn,
+  .generate-button,
+  .submit-button {
+    width: 100%;
+  }
+
+  .tab-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
