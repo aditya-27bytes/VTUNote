@@ -4,16 +4,22 @@
 
 You're experiencing this error:
 ```
-❌ MongoDB error: MongoServerError: bad auth : Authentication failed.
+❌ MongoDB error: Error: querySrv ENOTFOUND _mongodb._tcp.27
 ```
 
-This error occurs because you're using your MongoDB Atlas account credentials instead of a dedicated database user.
+This error occurs because your MongoDB username contains special characters that aren't properly URL encoded.
 
 ## Solution Applied
 
-I've updated your connection string to use placeholder values that remind you to use database user credentials.
+I've properly encoded the special characters in your username:
+- `:` → `%3A`
+- [@](file://d:\College%20Major%20Project\Final_Working_Repo\Final%20-%20Copy%20(2)\Final%20-%20Copy\ai-notes-platform\test-login.js#L0-L0) → `%40`
 
-## Steps to Fix Authentication
+So `adityasanjaychougale:aditya@27` becomes `adityasanjaychougale%3Aaditya%4027`.
+
+## Steps to Fix Authentication (If Still Getting Auth Errors)
+
+If you're now getting authentication errors instead of the DNS error, it's likely because you're using your MongoDB Atlas account credentials instead of a dedicated database user.
 
 ### 1. Create a Database User in MongoDB Atlas
 
@@ -63,7 +69,22 @@ After making these changes:
 2. ❌ Not creating a database user at all
 3. ❌ Not whitelisting your IP address
 4. ❌ Using a paused cluster
-5. ❌ Incorrect cluster URL
+5. ❌ Not properly encoding special characters in usernames/passwords
+
+## Special Character Encoding Reference
+
+If your username or password contains special characters, you MUST URL encode them:
+
+| Character | URL Encoded |
+|-----------|-------------|
+| `@`       | `%40`       |
+| `:`       | `%3A`       |
+| `/`       | `%2F`       |
+| `?`       | `%3F`       |
+| `#`       | `%23`       |
+| `[`       | `%5B`       |
+| `]`       | `%5D`       |
+| `%`       | `%25`       |
 
 ## Example of Correct Configuration
 
