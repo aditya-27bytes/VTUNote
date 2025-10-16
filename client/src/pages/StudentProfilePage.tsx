@@ -62,14 +62,7 @@ export default function StudentProfilePage() {
                   <span className="info-label">Account Type</span>
                   <span className="info-value">{user.role === 'admin' ? 'Administrator' : 'Student'}</span>
                 </div>
-                <div className="info-item">
-                  <span className="info-label">Member Since</span>
-                  <span className="info-value">{new Date(user.createdAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}</span>
-                </div>
+                {/* Removed createdAt field since it's not in the User interface */}
               </div>
             </div>
 

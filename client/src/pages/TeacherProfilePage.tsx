@@ -81,14 +81,7 @@ export default function TeacherProfilePage() {
                     }
                   </span>
                 </div>
-                <div className="info-item">
-                  <span className="info-label">Member Since</span>
-                  <span className="info-value">{new Date(teacher.createdAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}</span>
-                </div>
+                {/* Removed createdAt field since it's not in the Teacher interface */}
               </div>
               
               {teacher.bio && (
