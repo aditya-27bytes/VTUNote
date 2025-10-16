@@ -43,6 +43,14 @@ npm install
 npm start
 ```
 
+## MongoDB Atlas Connection
+
+If you're experiencing MongoDB connection issues:
+
+1. Check [MONGODB_CONNECTION_FIX.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/MONGODB_CONNECTION_FIX.md) for specific fixes
+2. Run `node get-atlas-connection-string.js` for step-by-step guidance
+3. Refer to [MONGODB_ATLAS_TROUBLESHOOTING.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/MONGODB_ATLAS_TROUBLESHOOTING.md) for detailed troubleshooting
+
 ## Environment Variables
 
 Set up your environment variables in both client and server directories using the provided [.env.example](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/server/.env.example) files.
@@ -50,6 +58,7 @@ Set up your environment variables in both client and server directories using th
 ## Documentation
 
 - [DEPLOYMENT_GUIDE.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/DEPLOYMENT_GUIDE.md) - Complete deployment instructions for Vercel and Render
+- [MONGODB_CONNECTION_FIX.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/MONGODB_CONNECTION_FIX.md) - Guide to fix MongoDB Atlas connection issues
 - [GITHUB_DEPLOYMENT_GUIDE.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/GITHUB_DEPLOYMENT_GUIDE.md) - Instructions for deploying to GitHub
 - [REPOSITORY_RESET_SUMMARY.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/REPOSITORY_RESET_SUMMARY.md) - Summary of the repository reset process
 - [GIT_IGNORE_GUIDE.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/GIT_IGNORE_GUIDE.md) - Explanation of git ignore patterns used
