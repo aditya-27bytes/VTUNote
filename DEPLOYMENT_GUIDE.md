@@ -94,9 +94,11 @@ Replace `your-render-app-url.onrender.com` with the actual URL of your Render de
 
 Click "Deploy" and wait for deployment to complete.
 
-## Step 4: Update CORS Settings (If Needed)
+## Step 4: Connect Frontend and Backend
 
-After deploying to Render, you may need to update the CORS settings in your server code to allow requests from your Vercel domain.
+### 4.1. Update CORS Settings
+
+After deploying to Render, you'll get your backend URL. Update the CORS settings in your server code to allow requests from your Vercel domain.
 
 In [server/src/index.js](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/server/src/index.js), update the CORS configuration:
 
@@ -114,12 +116,24 @@ app.use(cors({
 }));
 ```
 
-## Step 5: Redeploy After Changes
+### 4.2. Redeploy Applications
 
-After making any code changes:
-1. Commit and push to GitHub
-2. Render will automatically redeploy the backend
-3. Vercel will automatically redeploy the frontend
+1. Redeploy your backend to Render to apply the CORS changes
+2. Redeploy your frontend to Vercel to ensure environment variables are applied
+
+## Step 5: Update Environment Variables (If Needed)
+
+After your initial deployment, you might need to update environment variables:
+
+### In Vercel:
+1. Go to your project > Settings > Environment Variables
+2. Update `VITE_API_BASE_URL` with your actual Render backend URL
+3. Redeploy your frontend
+
+### In Render:
+1. Go to your service > Settings > Environment Variables
+2. Make any necessary updates
+3. The service will automatically redeploy
 
 ## Important Notes
 

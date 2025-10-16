@@ -27,6 +27,17 @@ For detailed deployment instructions, see [DEPLOYMENT_GUIDE.md](file:///d:/Colle
 4. Set up environment variables on both platforms
 5. Update the client's API URL to point to your Render deployment
 
+## Production URL Setup
+
+After deploying to Vercel and Render, you need to configure the connection between them:
+
+1. **Get your Render backend URL** after deploying your backend
+2. **Set the `VITE_API_BASE_URL` environment variable** in Vercel with your Render URL
+3. **Update CORS settings** in your backend to allow requests from your Vercel frontend
+4. **Redeploy both applications**
+
+See [PRODUCTION_URL_SETUP.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/PRODUCTION_URL_SETUP.md) for detailed instructions.
+
 ## Development
 
 ### Client Setup
@@ -58,6 +69,7 @@ Set up your environment variables in both client and server directories using th
 ## Documentation
 
 - [DEPLOYMENT_GUIDE.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/DEPLOYMENT_GUIDE.md) - Complete deployment instructions for Vercel and Render
+- [PRODUCTION_URL_SETUP.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/PRODUCTION_URL_SETUP.md) - Instructions for connecting Vercel frontend to Render backend
 - [MONGODB_CONNECTION_FIX.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/MONGODB_CONNECTION_FIX.md) - Guide to fix MongoDB Atlas connection issues
 - [GITHUB_DEPLOYMENT_GUIDE.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/GITHUB_DEPLOYMENT_GUIDE.md) - Instructions for deploying to GitHub
 - [REPOSITORY_RESET_SUMMARY.md](file:///d:/College%20Major%20Project/Final_Working_Repo/Final%20-%20Copy%20(2)/Final%20-%20Copy/ai-notes-platform/REPOSITORY_RESET_SUMMARY.md) - Summary of the repository reset process
