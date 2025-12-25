@@ -37,6 +37,7 @@ export default function Navbar() {
   // Navigation items for students
   const studentNavItems = [
     { path: '/dashboard', icon: '📊', label: 'Home', key: 'dashboard' },
+    { path: '/study-planner', icon: '🗓️', label: 'Planner', key: 'planner' },
     { path: '/upload', icon: '📤', label: 'Upload', key: 'upload' },
     { path: '/notes', icon: '📝', label: 'Notes', key: 'notes' },
     { path: '/student-notes', icon: '📚', label: 'Shared', key: 'shared', special: true },
@@ -71,7 +72,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="nav-logo" onClick={() => setIsExpanded(false)}>
           <span className="logo-icon">📚</span>
-          <span className="logo-text">VTU</span>
+          <span className="logo-text">VTU NOTE</span>
         </Link>
 
         {/* Navigation Items */}
@@ -80,9 +81,8 @@ export default function Navbar() {
             <Link
               key={item.key}
               to={item.path}
-              className={`nav-item ${
-                activeItem === item.key ? 'active' : ''
-              } ${(item as any).special ? 'special' : ''}`}
+              className={`nav-item ${activeItem === item.key ? 'active' : ''
+                } ${(item as any).special ? 'special' : ''}`}
               onClick={() => setIsExpanded(false)}
             >
               <span className="nav-icon">{item.icon}</span>
@@ -94,7 +94,7 @@ export default function Navbar() {
         {/* Profile & Logout Section */}
         {(user || teacher) && (
           <div className="nav-profile">
-            <Link 
+            <Link
               to={user ? '/profile' : '/teacher/profile'}
               className={`nav-item ${activeItem === 'profile' ? 'active' : ''}`}
               title={user ? `${user.name} - View Profile` : `${teacher?.name} - View Profile`}
@@ -106,7 +106,7 @@ export default function Navbar() {
                 {user ? user.name : teacher?.name}
               </span>
             </Link>
-            <button 
+            <button
               onClick={handleLogout}
               className="nav-item logout-btn"
               title="Logout"
@@ -118,7 +118,7 @@ export default function Navbar() {
         )}
 
         {/* Expand/Collapse Toggle for Mobile */}
-        <button 
+        <button
           className="nav-toggle"
           onClick={() => setIsExpanded(!isExpanded)}
           aria-label="Toggle navigation"

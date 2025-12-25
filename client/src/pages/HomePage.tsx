@@ -58,7 +58,8 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1 className="hero-title">📚 VTU AI Notes Platform</h1>
+          <h1 className="hero-title">📚 VTU NOTE</h1>
+          <h2 className="hero-subheading">Student Study Assistant</h2>
           <p className="hero-subtitle">
             Transform your PDF notes into interactive flashcards, summaries, and
             key concepts with AI-powered technology

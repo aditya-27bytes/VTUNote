@@ -190,7 +190,7 @@ export default function AdminPage() {
                 <h3 className="dashboard-name">Platform Administrator</h3>
                 <div className="dashboard-meta">
                   <span>System Management • Platform Oversight</span>
-                  <span>VTU AI Notes Platform</span>
+                  <span>VTU NOTE</span>
                 </div>
               </div>
             </div>
@@ -204,19 +204,19 @@ export default function AdminPage() {
 
         {/* Tab Navigation */}
         <div className="dashboard-tabs-row">
-          <button 
+          <button
             className={`dashboard-tab-btn${activeTab === 'dashboard' ? ' active' : ''}`}
             onClick={() => setActiveTab('dashboard')}
           >📊 Dashboard</button>
-          <button 
+          <button
             className={`dashboard-tab-btn${activeTab === 'users' ? ' active' : ''}`}
             onClick={() => setActiveTab('users')}
           >👥 Users</button>
-          <button 
+          <button
             className={`dashboard-tab-btn${activeTab === 'notes' ? ' active' : ''}`}
             onClick={() => setActiveTab('notes')}
           >📝 All Notes</button>
-          <button 
+          <button
             className={`dashboard-tab-btn${activeTab === 'public-notes' ? ' active' : ''}`}
             onClick={() => setActiveTab('public-notes')}
           >🌐 Public Notes</button>
@@ -280,9 +280,9 @@ export default function AdminPage() {
 
                   <div className="dashboard-control-group">
                     <label className="dashboard-control-checkbox">
-                      <input 
-                        type="checkbox" 
-                        checked={autoRefresh} 
+                      <input
+                        type="checkbox"
+                        checked={autoRefresh}
                         onChange={() => setAutoRefresh(!autoRefresh)}
                       />
                       🔄 Auto Refresh
@@ -302,8 +302,8 @@ export default function AdminPage() {
                     )}
                   </div>
 
-                  <button 
-                    onClick={loadStats} 
+                  <button
+                    onClick={loadStats}
                     className="dashboard-refresh-btn"
                     title="Refresh Dashboard Data"
                   >
@@ -326,12 +326,12 @@ export default function AdminPage() {
                     onRefresh={loadStats}
                   />
                 </div>
-                
+
                 <div className="dashboard-overview-card">
                   <h3>📈 Daily Activity</h3>
                   <DailyActivityChart data={stats.activity.daily} onRefresh={loadStats} />
                 </div>
-                
+
                 <div className="dashboard-overview-card">
                   <h3>📊 Most Viewed Notes</h3>
                   <div className="dashboard-notes-grid" style={{ gridTemplateColumns: '1fr', gap: '12px' }}>
@@ -362,12 +362,12 @@ export default function AdminPage() {
                   <h3>👥 Users by Branch</h3>
                   <UsersByBranchChart data={stats.users.byBranch} onRefresh={loadStats} />
                 </div>
-                
+
                 <div className="dashboard-overview-card">
                   <h3>🎓 Users by Semester</h3>
                   <UsersBySemesterChart data={stats.users.bySemester} onRefresh={loadStats} />
                 </div>
-                
+
                 <div className="dashboard-overview-card">
                   <h3>📝 Notes by Subject</h3>
                   <NotesBySubjectChart data={stats.notes.bySubject} onRefresh={loadStats} />
@@ -417,16 +417,16 @@ export default function AdminPage() {
                       </div>
                       <div className="dashboard-note-actions">
                         {u.role !== "admin" ? (
-                          <button 
-                            onClick={() => promote(u._id)} 
+                          <button
+                            onClick={() => promote(u._id)}
                             className="dashboard-action-btn publish"
                             title="Make Admin"
                           >
                             👑
                           </button>
                         ) : (
-                          <button 
-                            onClick={() => demote(u._id)} 
+                          <button
+                            onClick={() => demote(u._id)}
                             className="dashboard-action-btn unpublish"
                             title="Make User"
                           >
@@ -434,8 +434,8 @@ export default function AdminPage() {
                           </button>
                         )}
                         {u.role !== "admin" && (
-                          <button 
-                            onClick={() => del(u._id)} 
+                          <button
+                            onClick={() => del(u._id)}
                             className="dashboard-action-btn delete"
                             title="Delete User"
                           >
@@ -496,8 +496,8 @@ export default function AdminPage() {
                         >
                           {note.isPublic ? "🔒" : "🌐"}
                         </button>
-                        <button 
-                          onClick={() => deleteNote(note._id)} 
+                        <button
+                          onClick={() => deleteNote(note._id)}
                           className="dashboard-action-btn delete"
                           title="Delete Note"
                         >
@@ -556,8 +556,8 @@ export default function AdminPage() {
                         >
                           🔒
                         </button>
-                        <button 
-                          onClick={() => deleteNote(note._id)} 
+                        <button
+                          onClick={() => deleteNote(note._id)}
                           className="dashboard-action-btn delete"
                           title="Delete Note"
                         >

@@ -4,6 +4,17 @@ import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
+// Map provider ids to generic model labels for responses/UI
+function mapProviderToModelLabel(provider) {
+  switch (provider) {
+    case 'perplexity': return 'Model 1';
+    case 'openai': return 'Model 2';
+    case 'gemini': return 'Model 3';
+    case 'huggingface': return 'Model 4';
+    default: return provider || 'Model';
+  }
+}
+
 // Create comprehensive note with all features
 router.post("/", protect, async (req, res) => {
   try {
@@ -58,9 +69,11 @@ router.post("/", protect, async (req, res) => {
     const savedNote = await newNote.save();
     console.log(`✅ Note saved successfully: ${savedNote.title}`);
     
+    const noteObj = savedNote.toObject ? savedNote.toObject() : savedNote;
+    if (noteObj.provider) noteObj.provider = mapProviderToModelLabel(noteObj.provider);
     res.status(201).json({ 
       message: "Note created successfully", 
-      note: savedNote 
+      note: noteObj 
     });
   } catch (err) {
     console.error("Create note error:", err);
@@ -86,9 +99,10 @@ router.get("/", protect, async (req, res) => {
       .sort({ createdAt: -1 })
       .select('-extractedText'); // Exclude large text field for list view
     
+    const sanitizedNotes = notes.map(n => n.toObject ? ({ ...n.toObject(), provider: mapProviderToModelLabel(n.provider) }) : n);
     res.json({
-      notes,
-      count: notes.length,
+      notes: sanitizedNotes,
+      count: sanitizedNotes.length,
       filters: { module, subject, semester, branch, isPublic }
     });
   } catch (err) {
@@ -114,9 +128,10 @@ router.get("/public", async (req, res) => {
       .sort({ createdAt: -1, likes: -1 })
       .select('-extractedText');
     
+    const sanitizedPublicNotes = notes.map(n => n.toObject ? ({ ...n.toObject(), provider: mapProviderToModelLabel(n.provider) }) : n);
     res.json({
-      notes,
-      count: notes.length
+      notes: sanitizedPublicNotes,
+      count: sanitizedPublicNotes.length
     });
   } catch (err) {
     console.error("Fetch public notes error:", err);
@@ -163,7 +178,9 @@ router.get("/:id", protect, async (req, res) => {
     note.views = (note.views || 0) + 1;
     await note.save();
     
-    res.json(note);
+    const obj = note.toObject ? note.toObject() : note;
+    if (obj.provider) obj.provider = mapProviderToModelLabel(obj.provider);
+    res.json(obj);
   } catch (err) {
     console.error("Fetch single note error:", err);
     res.status(500).json({ error: "Server error while fetching note" });
@@ -189,9 +206,11 @@ router.put("/:id", protect, async (req, res) => {
       { new: true }
     );
     
+    const updatedObj = updatedNote.toObject ? updatedNote.toObject() : updatedNote;
+    if (updatedObj.provider) updatedObj.provider = mapProviderToModelLabel(updatedObj.provider);
     res.json({
       message: "Note updated successfully",
-      note: updatedNote
+      note: updatedObj
     });
   } catch (err) {
     console.error("Update note error:", err);

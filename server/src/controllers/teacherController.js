@@ -9,7 +9,7 @@ const generateToken = (id) => {
   });
 };
 
-// @desc    Register teacher
+// @desc    Register teacher (legacy - kept for backward compatibility)
 // @route   POST /api/teachers/register
 // @access  Public
 export const registerTeacher = async (req, res) => {
@@ -116,6 +116,13 @@ export const loginTeacher = async (req, res) => {
       return res.status(401).json({ message: 'Account is deactivated. Please contact admin.' });
     }
 
+    // Note: Teachers registered via OTP need admin verification to access dashboard
+    // but they can still log in to see their pending status
+    if (!teacher.isVerified) {
+      console.log(`⚠️ Login by unverified teacher: ${email}`);
+      // Allows login but frontend will show pending admin verification status
+    }
+
     // Generate token
     const token = generateToken(teacher._id);
     
@@ -124,6 +131,7 @@ export const loginTeacher = async (req, res) => {
     }
 
     res.json({
+      message: teacher.isVerified ? "✅ Login successful" : "⚠️ Login successful - Awaiting admin verification",
       _id: teacher._id,
       name: teacher.name,
       email: teacher.email,

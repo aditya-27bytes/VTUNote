@@ -24,6 +24,8 @@ import teacherNoteRoutes from "./routes/teacherNoteRoutes.js";
 import studentNoteRoutes from "./routes/studentNoteRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
 import connectionRoutes from "./routes/connectionRoutes.js";
+import studyPlannerRoutes from "./routes/studyPlannerRoutes.js";
+import { startStudyPlannerScheduler } from './services/studyPlannerScheduler.js';
 
 dotenv.config();
 
@@ -34,6 +36,9 @@ console.log('- OPENAI_API_KEY:', process.env.OPENAI_API_KEY ? `${process.env.OPE
 console.log('- GEMINI_API_KEY:', process.env.GEMINI_API_KEY ? `${process.env.GEMINI_API_KEY.substring(0, 15)}...` : '❌ NOT FOUND');
 console.log('- MONGO_URI:', process.env.MONGO_URI ? '✅ Found' : '❌ NOT FOUND');
 console.log('- JWT_SECRET:', process.env.JWT_SECRET ? '✅ Found' : '❌ NOT FOUND');
+console.log('- GMAIL_USER:', process.env.GMAIL_USER ? '✅ Found' : '⚠️  NOT FOUND (OTP emails may not work)');
+console.log('- GMAIL_APP_PASSWORD:', process.env.GMAIL_APP_PASSWORD ? '✅ Found' : '⚠️  NOT FOUND (OTP emails may not work)');
+console.log('- GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID ? '✅ Found' : '⚠️  NOT FOUND (Google OAuth may not work)');
 console.log('- Actual MONGO_URI being used:', process.env.MONGO_URI || "mongodb://localhost:27017/ai-notes");
 
 const app = express();
@@ -69,6 +74,7 @@ app.use("/api/teachers", teacherRoutes);
 app.use("/api/teacher-notes", teacherNoteRoutes);
 app.use("/api/quizzes", quizRoutes);
 app.use("/api/connections", connectionRoutes);
+app.use("/api/study-planner", studyPlannerRoutes);
 
 // Student notes endpoint (public + connected teacher notes)
 app.use("/api/student/notes", studentNoteRoutes);
@@ -85,6 +91,15 @@ mongoose
   .connect(MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB error:", err));
+
+// Start background services after DB is connected
+mongoose.connection.once('open', () => {
+  try {
+    startStudyPlannerScheduler();
+  } catch (err) {
+    console.error('Failed to start study planner scheduler:', err.message);
+  }
+});
 
 // Graceful shutdown
 process.on("SIGINT", async () => {
@@ -110,21 +125,33 @@ process.on('uncaughtException', (error) => {
 });
 
 // ----------------- START SERVER -----------------
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
-const startServer = (port) => {
-  try {
-    app.listen(port, () => {
-      console.log(`🚀 Server running on port ${port}`);
-    });
-  } catch (err) {
-    if (err.code === 'EADDRINUSE') {
-      console.log(`⚠️ Port ${port} is busy, trying port ${port + 1}...`);
-      startServer(port + 1);
+// Try to start the server and handle EADDRINUSE by retrying a few ports.
+const MAX_RETRIES = 5;
+const startServer = (port, attempt = 0) => {
+  const server = app.listen(port);
+
+  server.once('listening', () => {
+    console.log(`🚀 Server running on port ${port}`);
+  });
+
+  server.once('error', (err) => {
+    if (err && err.code === 'EADDRINUSE') {
+      if (attempt < MAX_RETRIES) {
+        const nextPort = port + 1;
+        console.warn(`⚠️ Port ${port} is in use. Retrying on port ${nextPort} (attempt ${attempt + 1}/${MAX_RETRIES})`);
+        // Give a small delay before retrying to avoid tight loop
+        setTimeout(() => startServer(nextPort, attempt + 1), 200);
+      } else {
+        console.error(`❌ Could not start server after ${MAX_RETRIES} retries. Port ${port} still in use.`);
+        process.exit(1);
+      }
     } else {
       console.error('Failed to start server:', err);
+      process.exit(1);
     }
-  }
+  });
 };
 
 startServer(PORT);

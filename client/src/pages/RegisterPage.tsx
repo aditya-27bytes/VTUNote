@@ -1,6 +1,7 @@
 import { useState } from "react";
 import apiClient from "../utils/apiClient";
 import { useNavigate, Link } from "react-router-dom";
+import OTPVerificationModal from "../components/OTPVerificationModal";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ 
@@ -32,14 +33,23 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await apiClient.post("/auth/register", form);
-      alert("Registration successful! Please login.");
-      navigate("/");
+      // Use OTP-based registration flow
+      const res = await apiClient.post("/auth/register-request", form);
+      setRegistrationData(res.data.registrationData);
+      setShowOTPModal(true);
     } catch (e: any) {
       alert(e.response?.data?.error || "Failed to register");
     } finally {
       setLoading(false);
     }
+  };
+
+  const [showOTPModal, setShowOTPModal] = useState(false);
+  const [registrationData, setRegistrationData] = useState<any>(null);
+
+  const handleOtpSuccess = (token: string) => {
+    // Redirect to dashboard after verification
+    navigate('/dashboard');
   };
 
   return (
@@ -119,6 +129,12 @@ export default function RegisterPage() {
           </Link>
         </p>
       </form>
+      <OTPVerificationModal
+        open={showOTPModal}
+        onClose={() => setShowOTPModal(false)}
+        registrationData={registrationData}
+        onSuccess={handleOtpSuccess}
+      />
     </div>
   );
 }

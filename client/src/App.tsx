@@ -28,6 +28,7 @@ import AvailableQuizzesPage from "./pages/AvailableQuizzesPage";
 import TakeQuizPage from "./pages/TakeQuizPage";
 import StudentProfilePage from "./pages/StudentProfilePage";
 import TeacherProfilePage from "./pages/TeacherProfilePage";
+import StudyPlannerPage from "./pages/StudyPlannerPage";
 
 import { useAuth } from "./contexts/AuthContext";
 import { useTeacherAuth } from "./contexts/TeacherAuthContext";
@@ -161,6 +162,14 @@ export default function App() {
           element={
             <Protected>
               <StudentProfilePage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/study-planner"
+          element={
+            <Protected>
+              <StudyPlannerPage />
             </Protected>
           }
         />

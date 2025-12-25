@@ -174,7 +174,7 @@ const NotesPage: React.FC = () => {
     <Layout>
       <div className="page">
         <div className="notes-header">
-          <h2>📚 VTU Notes Library</h2>
+          <h2>📚 VTU NOTE Library</h2>
           <div className="action-buttons">
             <Link to="/upload" className="btn-primary">📤 Upload New PDF</Link>
           </div>

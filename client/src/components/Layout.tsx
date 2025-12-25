@@ -14,13 +14,13 @@ export default function Layout({ children }: LayoutProps) {
         <div className="footer-container">
           <div className="footer-column">
             <div className="footer-logo">
-              <h2 className="footer-title">📚 VTU Notes</h2>
+              <h2 className="footer-title">📚 VTU NOTE</h2>
             </div>
             <p className="footer-about">
               Your comprehensive platform for VTU study materials. Generate flashcards, summaries, and key concepts from your PDF notes with AI-powered technology.
             </p>
           </div>
-          
+
           <div className="footer-column">
             <h3 className="footer-title">Quick Links</h3>
             <div className="footer-links">
@@ -34,7 +34,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="footer-column">
             <h3 className="footer-title">Contact Us</h3>
             <div className="footer-links">
-              <div className="social-link">📧 support@vtunotes.com</div>
+              <div className="social-link">📧 support@vtunote.com</div>
               <div className="social-link">📞 +91 98765 43210</div>
               <div className="social-link">🏫 VTU, Belagavi</div>
             </div>
@@ -50,9 +50,9 @@ export default function Layout({ children }: LayoutProps) {
             </div>
           </div>
         </div>
-        
+
         <div className="footer-copyright">
-          <p>&copy; 2025 VTU Notes Platform. All rights reserved. Designed for VTU students.</p>
+          <p>&copy; 2025 VTU NOTE Platform. All rights reserved. Designed for VTU students.</p>
         </div>
       </footer>
     </div>

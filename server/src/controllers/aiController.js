@@ -26,6 +26,17 @@ function chunkText(text, maxChunkSize = 50000) {
   return chunks;
 }
 
+// Map provider ids to generic model labels for responses/UI
+function mapProviderToModelLabel(provider) {
+  switch (provider) {
+    case 'perplexity': return 'Model 1';
+    case 'openai': return 'Model 2';
+    case 'gemini': return 'Model 3';
+    case 'huggingface': return 'Model 4';
+    default: return 'Model';
+  }
+}
+
 // Helper function to combine analysis results from multiple chunks
 function combineAnalysisResults(results) {
   const combined = {
@@ -535,7 +546,7 @@ export const summarize = async (req, res) => {
     if (!providers[provider]) return res.status(400).json({ error: "Unsupported provider" });
 
     const result = await providers[provider](text);
-    res.json({ provider, result });
+    res.json({ provider: mapProviderToModelLabel(provider), result });
   } catch (e) {
     console.error("Summarize error:", e);
     res.status(500).json({ error: e.response?.data || e.message });
@@ -606,7 +617,7 @@ export const comprehensiveAnalysis = async (req, res) => {
     });
     
     res.json({
-      provider,
+      provider: mapProviderToModelLabel(provider),
       ...parsedResult
     });
     
@@ -674,7 +685,7 @@ export const questionAnswer = async (req, res) => {
       return res.status(400).json({ error: "document context is required" });
     }
     
-    console.log(`💬 Processing Q&A with ${provider}...`);
+    console.log(`💬 Processing Q&A with provider (anonymized)`);
     console.log(`❓ Question: ${question}`);
     console.log(`📄 Context length: ${context.fullText.length} characters`);
     
@@ -683,7 +694,7 @@ export const questionAnswer = async (req, res) => {
       return res.status(400).json({ error: "Unsupported provider" });
     }
     
-    console.log(`📋 Sending Q&A request to ${provider}...`);
+    console.log(`📋 Sending Q&A request to provider (anonymized)...`);
     const answer = await qaProviders[provider](context.fullText, question, context);
     
     console.log(`✅ Q&A response received (${answer.length} characters)`);
@@ -692,7 +703,7 @@ export const questionAnswer = async (req, res) => {
     res.json({
       question,
       answer,
-      provider,
+      provider: mapProviderToModelLabel(provider),
       contextLength: context.fullText.length
     });
     

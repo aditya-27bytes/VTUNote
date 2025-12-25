@@ -75,6 +75,22 @@ const NoteDetailPage: React.FC = () => {
   const [isAskingQuestion, setIsAskingQuestion] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState('perplexity');
 
+  // Map provider ids to generic model labels shown in the UI
+  const getModelLabel = (prov: string | undefined) => {
+    switch (prov) {
+      case 'perplexity':
+        return 'Model 1';
+      case 'openai':
+        return 'Model 2';
+      case 'gemini':
+        return 'Model 3';
+      case 'huggingface':
+        return 'Model 4';
+      default:
+        return 'Model';
+    }
+  };
+
   useEffect(() => {
     if (id) {
       fetchNoteDetails();
@@ -640,10 +656,10 @@ const NoteDetailPage: React.FC = () => {
                     className="ai-provider-select"
                     disabled={isAskingQuestion}
                   >
-                    <option value="perplexity">🔮 Perplexity (Recommended)</option>
-                    <option value="openai">🧠 OpenAI GPT-4</option>
-                    <option value="gemini">✨ Google Gemini</option>
-                    <option value="huggingface">🤗 Hugging Face</option>
+                    <option value="perplexity">Model 1 (Recommended)</option>
+                    <option value="openai">Model 2</option>
+                    <option value="gemini">Model 3</option>
+                    <option value="huggingface">Model 4</option>
                   </select>
                 </div>
               

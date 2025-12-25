@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
   branch: { type: String, required: true }, // Engineering branch
   semester: { type: Number, required: true, min: 1, max: 8 }, // Current semester
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
+  isVerified: { type: Boolean, default: false },
+  verifiedAt: { type: Date },
   unreadNotifications: { type: Number, default: 0 },
   lastActive: { type: Date, default: Date.now }
 }, { timestamps: true });

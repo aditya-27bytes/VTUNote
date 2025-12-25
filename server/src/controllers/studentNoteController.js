@@ -2,6 +2,17 @@ import Note from '../models/Note.js';
 import Connection from '../models/Connection.js';
 import Teacher from '../models/Teacher.js';
 
+// Map provider ids to generic model labels for responses/UI
+function mapProviderToModelLabel(provider) {
+  switch (provider) {
+    case 'perplexity': return 'Model 1';
+    case 'openai': return 'Model 2';
+    case 'gemini': return 'Model 3';
+    case 'huggingface': return 'Model 4';
+    default: return provider || 'Model';
+  }
+}
+
 // @desc    Get notes available to a student (public + connected teachers)
 // @route   GET /api/student/notes
 // @access  Private/User
@@ -111,6 +122,11 @@ export const getStudentAvailableNotes = async (req, res) => {
       flashcardCount: note.flashcards ? note.flashcards.length : 0
     }));
 
+    // Anonymize provider labels
+    notesWithUrls.forEach(n => {
+      if (n.provider) n.provider = mapProviderToModelLabel(n.provider);
+    });
+
     res.json({
       notes: notesWithUrls,
       pagination: {
@@ -180,6 +196,7 @@ export const getStudentNoteDetail = async (req, res) => {
       flashcardCount: note.flashcards ? note.flashcards.length : 0,
       views: (note.views || 0) + 1 // Include the incremented view
     };
+    if (noteDetail.provider) noteDetail.provider = mapProviderToModelLabel(noteDetail.provider);
     
     res.json({
       note: noteDetail,

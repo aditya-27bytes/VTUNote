@@ -2,6 +2,16 @@ import Note from '../models/Note.js';
 import Teacher from '../models/Teacher.js';
 import { processWithAI } from '../services/aiService.js';
 
+// Map provider ids to generic model labels for responses/UI
+function mapProviderToModelLabel(provider) {
+  switch (provider) {
+    case 'perplexity': return 'Model 1';
+    case 'openai': return 'Model 2';
+    case 'gemini': return 'Model 3';
+    case 'huggingface': return 'Model 4';
+    default: return provider || 'Model';
+  }
+}
 // @desc    Get teacher's notes
 // @route   GET /api/teacher/notes
 // @access  Private/Teacher
@@ -20,7 +30,13 @@ export const getTeacherNotes = async (req, res) => {
     
     console.log('Found notes:', notes.length);
     
-    res.json(notes);
+    // Sanitize provider field before sending to client
+    const sanitized = notes.map(n => {
+      const obj = n.toObject ? n.toObject() : n;
+      obj.provider = mapProviderToModelLabel(obj.provider);
+      return obj;
+    });
+    res.json(sanitized);
   } catch (error) {
     console.error('Get teacher notes error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -45,7 +61,9 @@ export const getTeacherNoteById = async (req, res) => {
       return res.status(404).json({ message: 'Note not found' });
     }
     
-    res.json(note);
+    const obj = note.toObject ? note.toObject() : note;
+    obj.provider = mapProviderToModelLabel(obj.provider);
+    res.json(obj);
   } catch (error) {
     console.error('Get teacher note by ID error:', error);
     res.status(500).json({ message: 'Server error' });
