@@ -1,4 +1,4 @@
-# AI Notes Platform
+# VTU NOTE Student Study Assistant
 
 A comprehensive platform for managing and sharing educational notes with AI-powered features.
 
